@@ -11,7 +11,6 @@ export const user = derived(userStore, ($userStore) => $userStore);
 export async function check_login() {
   const request = await fetch('https://localhost/api/v1/check_login', {
     method: 'GET',
-    mode: 'cors',
     credentials: 'same-origin'
   });
   const logged_in = request.status === 200;
@@ -29,7 +28,6 @@ export async function check_login() {
 export async function handleCredentialResponse({ credential }: CredentialResponse) {
   const response = await fetch('https://localhost/api/v1/login', {
     method: 'POST',
-    mode: 'cors',
     credentials: 'same-origin',
     body: credential
   });
