@@ -7,6 +7,7 @@
     id: number;
     user_id: number;
     cloth_name: string;
+    count: number;
   }
 
   let clothes: Cloth[] | undefined;
@@ -20,6 +21,7 @@
     });
 
     clothes = await request.json();
+    console.log(clothes);
   }
 
   user.subscribe(update);
@@ -27,6 +29,13 @@
   function remove(id: number) {
     fetch('https://localhost/api/v1/cloth/' + id, {
       method: 'DELETE',
+      credentials: 'same-origin'
+    }).then(update);
+  }
+
+  function wear(id: number) {
+    fetch(`https://localhost/api/v1/cloth/${id}/add_wear`, {
+      method: 'POST',
       credentials: 'same-origin'
     }).then(update);
   }
@@ -42,9 +51,10 @@
   <ul>
     {#each clothes as cloth}
       <li>
-        <p>{cloth.cloth_name}</p>
+        <p>{cloth.cloth_name} - {cloth.count}</p>
         <img src="/api/v1/cloth/{cloth.id}/image" alt="" />
         <button on:click={() => remove(cloth.id)}>Remove</button>
+        <button on:click={() => wear(cloth.id)}>Wear</button>
       </li>
     {/each}
   </ul>
