@@ -17,6 +17,5 @@ FROM docker.io/caddy
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY --from=builder /usr/src/track-wear/build /usr/share/caddy/frontend
 
-ENV DOMAIN=localhost
-ENV VITE_CLIENT_ID=
-ENV VITE_API_ENDPOINT=/
+ENV CLIENT_ID=
+ENV API_ENDPOINT=
