@@ -1,5 +1,7 @@
 :80 {
-    templates
+    templates {
+        mime application/javascript
+    }
     root * /usr/share/caddy/frontend
     file_server
 }
