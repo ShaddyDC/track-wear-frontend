@@ -1,11 +1,13 @@
 <script lang="ts">
+  import { api_endpoint } from './api';
+
   import { check_login, handleCredentialResponse, user } from './user';
 
   const google_loaded = async () => {
     if (await check_login()) return;
 
     google.accounts.id.initialize({
-      client_id: '513324624986-fn538769dc89nlp075t083h03ihnjldi.apps.googleusercontent.com',
+      client_id: api_endpoint,
       callback: handleCredentialResponse,
       auto_select: true
     });

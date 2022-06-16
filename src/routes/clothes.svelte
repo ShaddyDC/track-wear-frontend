@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { api_endpoint } from '$lib/api';
+
   import Login from '$lib/login.svelte';
   import Nav from '$lib/nav.svelte';
   import { user } from '$lib/user';
@@ -15,7 +17,7 @@
   async function update() {
     if (!$user) return;
 
-    const request = await fetch('https://localhost/api/v1/clothes', {
+    const request = await fetch(api_endpoint + '/api/v1/clothes', {
       method: 'GET',
       credentials: 'same-origin'
     });
@@ -27,14 +29,14 @@
   user.subscribe(update);
 
   function remove(id: number) {
-    fetch('https://localhost/api/v1/cloth/' + id, {
+    fetch(api_endpoint + '/api/v1/cloth/' + id, {
       method: 'DELETE',
       credentials: 'same-origin'
     }).then(update);
   }
 
   function wear(id: number) {
-    fetch(`https://localhost/api/v1/cloth/${id}/add_wear`, {
+    fetch(api_endpoint + `/api/v1/cloth/${id}/add_wear`, {
       method: 'POST',
       credentials: 'same-origin'
     }).then(update);

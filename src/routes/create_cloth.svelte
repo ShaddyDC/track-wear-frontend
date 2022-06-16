@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { api_endpoint } from '$lib/api';
+
   import Login from '$lib/login.svelte';
   import Nav from '$lib/nav.svelte';
   import { user } from '$lib/user';
@@ -18,7 +20,7 @@
     data.append('name', name);
     data.append('image', image);
 
-    const request = await fetch('https://localhost/api/v1/create_cloth', {
+    const request = await fetch(api_endpoint + '/api/v1/create_cloth', {
       method: 'POST',
       credentials: 'same-origin',
       body: data
