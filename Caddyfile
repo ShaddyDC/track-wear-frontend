@@ -1,0 +1,5 @@
+{$DOMAIN} {
+    reverse_proxy /api/* {$BACKEND}
+   root * /usr/share/caddy/frontend
+   file_server
+}
