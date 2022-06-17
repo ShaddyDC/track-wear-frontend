@@ -5,7 +5,7 @@
     if (await check_login()) return;
 
     google.accounts.id.initialize({
-      client_id: '{{env "CLIENT_ID"}}',
+      client_id: import.meta.env.VITE_CLIENT_ID,
       callback: handleCredentialResponse,
       auto_select: true
     });
