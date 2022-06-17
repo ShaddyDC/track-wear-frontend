@@ -5,38 +5,38 @@
   import Nav from '$lib/nav.svelte';
   import { user } from '$lib/user';
 
-  interface Cloth {
+  interface Item {
     id: number;
     user_id: number;
-    cloth_name: string;
+    item_name: string;
     count: number;
   }
 
-  let clothes: Cloth[] | undefined;
+  let items: Item[] | undefined;
 
   async function update() {
     if (!$user) return;
 
-    const request = await fetch(api_endpoint + '/api/v1/clothes', {
+    const request = await fetch(api_endpoint + '/api/v1/items', {
       method: 'GET',
       credentials: 'same-origin'
     });
 
-    clothes = await request.json();
-    console.log(clothes);
+    items = await request.json();
+    console.log(items);
   }
 
   user.subscribe(update);
 
   function remove(id: number) {
-    fetch(api_endpoint + '/api/v1/cloth/' + id, {
+    fetch(api_endpoint + '/api/v1/item/' + id, {
       method: 'DELETE',
       credentials: 'same-origin'
     }).then(update);
   }
 
-  function wear(id: number) {
-    fetch(api_endpoint + `/api/v1/cloth/${id}/add_wear`, {
+  function use(id: number) {
+    fetch(api_endpoint + `/api/v1/item/${id}/add_use`, {
       method: 'POST',
       credentials: 'same-origin'
     }).then(update);
@@ -49,14 +49,14 @@
 
 <Login />
 
-{#if $user && clothes}
+{#if $user && items}
   <ul>
-    {#each clothes as cloth}
+    {#each items as item}
       <li>
-        <p>{cloth.cloth_name} - {cloth.count}</p>
-        <img src="/api/v1/cloth/{cloth.id}/image" alt="" />
-        <button on:click={() => remove(cloth.id)}>Remove</button>
-        <button on:click={() => wear(cloth.id)}>Wear</button>
+        <p>{item.item_name} - {item.count}</p>
+        <img src="/api/v1/item/{item.id}/image" alt="" />
+        <button on:click={() => remove(item.id)}>Remove</button>
+        <button on:click={() => use(item.id)}>Use</button>
       </li>
     {/each}
   </ul>

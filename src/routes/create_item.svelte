@@ -20,7 +20,7 @@
     data.append('name', name);
     data.append('image', image);
 
-    const request = await fetch(api_endpoint + '/api/v1/create_cloth', {
+    const request = await fetch(api_endpoint + '/api/v1/create_item', {
       method: 'POST',
       credentials: 'same-origin',
       body: data
@@ -38,7 +38,7 @@
 
 {#if $user}
   <form on:submit|preventDefault={post}>
-    <label for="name">Piece of clothing:</label><br />
+    <label for="name">Item:</label><br />
     <input type="text" id="name" name="name" bind:value={name} /><br />
     <input type="file" id="image" name="image" bind:files={file} /><br />
     <input type="submit" value="Submit" />
